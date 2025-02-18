@@ -3,6 +3,6 @@ import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-  //base: "/SDEV_255_Final_Project_TeamName/",
+  base: "/SDEV_255_Final_Project_TeamName/",
   plugins: [react()],
 });
