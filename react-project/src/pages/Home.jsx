@@ -1,15 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Student from "./Student";
+import Teacher from "./Teacher";
 
 const Home = ({ name }) => (
   <div id="content">
     <h1>Get started using {name} </h1>
     <div id="buttons">
-      <a className="button-link" href="/student">
+      <Link className="button-link" to="/student">
         Student
-      </a>
-      <a className="button-link" href="/teacher">
+      </Link>
+      <Link className="button-link" to="/teacher">
         Teacher
-      </a>
+      </Link>
     </div>
   </div>
 );
