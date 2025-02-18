@@ -1,5 +1,6 @@
 {
   "name": "react-project",
+  "homepage": "https://shorban1.github.io/SDEV_255_Final_Project_TeamName/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -30,6 +31,3 @@
     "vite": "^6.1.0"
   }
 }
-{
-  "homepage": "https://shorban1.github.io/SDEV_255_Final_Project_TeamName/",
-  }
