@@ -6,6 +6,8 @@ import { Route, Routes, useNavigate, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
+import Course from "./pages/Course";
+import Edit from "./pages/Edit";
 
 function Header({ name }) {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="/" element={<Home name="Course Manager" />} />
         <Route path="/student" element={<Student />} />
         <Route path="/teacher" element={<Teacher />} />
+        <Route path="/courses/:id" element={<Course />} />
+        <Route path="/courses/edit/:id" element={<Edit />} />
       </Routes>
     </>
   );

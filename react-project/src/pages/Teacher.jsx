@@ -46,7 +46,7 @@ function Teacher() {
 
       let html = "";
       for (let course of courses) {
-        html += `<a href="#/courses?id=${course._id}">${course.title} - ${course.department}${course.course_number}</a> - <a href="#/courses/edit?id=${course._id}">Edit</a></li>`;
+        html += `<a href="#/courses/${course._id}">${course.title} - ${course.department}${course.course_number}</a> - <a href="#/courses/edit/${course._id}">Edit</a></li>`;
       }
 
       document.querySelector("#course-list").innerHTML = html;
