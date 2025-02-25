@@ -22,6 +22,7 @@ function Course() {
       <h2>${course.title} - ${course.department}${course.course_number}</h2>
       <p>Credits: ${course.credits}</p>
       <p>Description: ${course.description}</p>
+      <a href="#/courses/edit/${course._id}">Edit</a>
       `;
 
       document.querySelector("#course-details").innerHTML = html;
