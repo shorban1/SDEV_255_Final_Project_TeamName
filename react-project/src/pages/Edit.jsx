@@ -32,22 +32,26 @@ async function editCourse() {
   }
 }
 async function deleteCourse() {
-  const id = document.querySelector("#course-id").value;
-  const response = await fetch(
-    //For Deployment
-    "https://mire-fluttering-scale.glitch.me/api/courses/" + id,
-    //For Local Development
-    //"http://localhost:3000/api/courses/" + id,
-    {
-      method: "DELETE",
-    }
-  );
+  if (
+    confirm("You are about to delete this course. Do you want to continue?")
+  ) {
+    const id = document.querySelector("#course-id").value;
+    const response = await fetch(
+      //For Deployment
+      "https://mire-fluttering-scale.glitch.me/api/courses/" + id,
+      //For Local Development
+      //"http://localhost:3000/api/courses/" + id,
+      {
+        method: "DELETE",
+      }
+    );
 
-  if (response.ok) {
-    alert("Deleted Course");
-    window.location.replace("/SDEV_255_Final_Project_TeamName/#/teacher");
-  } else {
-    document.querySelector("#error").innerHTML = "Cannot delete course";
+    if (response.ok) {
+      alert("Deleted Course");
+      window.location.replace("/SDEV_255_Final_Project_TeamName/#/teacher");
+    } else {
+      document.querySelector("#error").innerHTML = "Cannot delete course";
+    }
   }
 }
 

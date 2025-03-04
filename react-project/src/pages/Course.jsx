@@ -9,13 +9,6 @@ function Course() {
       window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
     }
 
-    if (localStorage.getItem("role") == "teacher") {
-      if (localStorage.getItem("uid") == id) {
-        courseOptions = "<a href='#/courses/edit/" + id + "'>Edit</a>";
-      }
-    } else if (localStorage.getItem("role") == "student") {
-    }
-
     async function fetchCourses() {
       console.log(id);
 
@@ -27,6 +20,13 @@ function Course() {
       );
       const course = await response.json();
       console.log(course);
+
+      if (localStorage.getItem("role") == "teacher") {
+        if (course.instructor_ids.includes(localStorage.getItem("id"))) {
+          courseOptions = "<a href='#/courses/edit/" + id + "'>Edit</a>";
+        }
+      } else if (localStorage.getItem("role") == "student") {
+      }
 
       let html = "";
 
