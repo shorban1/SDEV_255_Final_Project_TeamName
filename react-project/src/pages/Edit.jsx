@@ -45,6 +45,7 @@ async function deleteCourse() {
 
   if (response.ok) {
     alert("Deleted Course");
+    window.location.replace("/SDEV_255_Final_Project_TeamName/#/teacher");
   } else {
     document.querySelector("#error").innerHTML = "Cannot delete course";
   }
@@ -53,6 +54,13 @@ async function deleteCourse() {
 function Edit() {
   const { id } = useParams();
   useEffect(() => {
+    if (
+      localStorage.getItem("role") !== "teacher" ||
+      localStorage.getItem("auth") !== "1"
+    ) {
+      window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
+    }
+
     async function fetchCourses() {
       const response = await fetch(
         //For Deployment
@@ -68,6 +76,11 @@ function Edit() {
         document.querySelector("#course-num").value = course.course_number;
         document.querySelector("#credits").value = course.credits;
         document.querySelector("#description").value = course.description;
+
+        if (!course.instructor_ids.includes(localStorage.getItem("id"))) {
+          window.history.back();
+          alert("You are not allowed to edit this course.");
+        }
       }
     }
 

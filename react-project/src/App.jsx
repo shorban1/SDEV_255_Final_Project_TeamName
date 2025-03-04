@@ -8,8 +8,31 @@ import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
 import Course from "./pages/Course";
 import Edit from "./pages/Edit";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+function logOut() {
+  localStorage.removeItem("auth");
+  localStorage.removeItem("token");
+  localStorage.removeItem("uid");
+  localStorage.removeItem("uname");
+  localStorage.removeItem("role");
+
+  window.location.replace("/SDEV_255_Final_Project_TeamName/#/");
+  window.location.reload();
+}
 
 function Header({ name }) {
+  let logoutBtn = "";
+  if (localStorage.getItem("auth") == 1) {
+    logoutBtn = (
+      <li>
+        <button id="logout" onClick={logOut}>
+          Logout
+        </button>
+      </li>
+    );
+  }
   return (
     <header>
       <Link to="/">{name}</Link>
@@ -21,6 +44,7 @@ function Header({ name }) {
           <li>
             <Link to="/teacher">Teacher</Link>
           </li>
+          {logoutBtn}
         </ul>
       </nav>
     </header>
@@ -37,6 +61,8 @@ function App() {
         <Route path="/teacher" element={<Teacher />} />
         <Route path="/courses/:id" element={<Course />} />
         <Route path="/courses/edit/:id" element={<Edit />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );

@@ -3,7 +3,19 @@ import { useParams } from "react-router-dom";
 
 function Course() {
   const { id } = useParams();
+  let courseOptions = "";
   useEffect(() => {
+    if (localStorage.getItem("auth") !== "1") {
+      window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
+    }
+
+    if (localStorage.getItem("role") == "teacher") {
+      if (localStorage.getItem("uid") == id) {
+        courseOptions = "<a href='#/courses/edit/" + id + "'>Edit</a>";
+      }
+    } else if (localStorage.getItem("role") == "student") {
+    }
+
     async function fetchCourses() {
       console.log(id);
 
@@ -22,7 +34,7 @@ function Course() {
       <h2>${course.title} - ${course.department}${course.course_number}</h2>
       <p>Credits: ${course.credits}</p>
       <p>Description: ${course.description}</p>
-      <a href="#/courses/edit/${course._id}">Edit</a>
+      ${courseOptions}
       `;
 
       document.querySelector("#course-details").innerHTML = html;

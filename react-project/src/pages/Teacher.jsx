@@ -1,5 +1,15 @@
 import React, { useEffect } from "react";
 
+function toggleModule() {
+  if (document.querySelector("#add-module").style.display == "block") {
+    document.querySelector("#add-module").style.display = "none";
+    document.querySelector("#add-course-open-btn").innerHTML = "Add a Course +";
+  } else {
+    document.querySelector("#add-module").style.display = "block";
+    document.querySelector("#add-course-open-btn").innerHTML = "Add a Course x";
+  }
+}
+
 async function addCourse() {
   const course = {
     title: document.querySelector("#title").value,
@@ -7,7 +17,7 @@ async function addCourse() {
     course_number: document.querySelector("#course-num").value,
     credits: document.querySelector("#credits").value,
     description: document.querySelector("#description").value,
-    instructor_ids: ["T001"],
+    instructor_ids: ["67c66f59b0f5c4ab17437c8a", localStorage.getItem("uid")],
   };
 
   const response = await fetch(
@@ -27,7 +37,8 @@ async function addCourse() {
   if (response.ok) {
     const results = await response.json();
     alert("Added course with ID of " + results._id);
-    document.querySelector("form").reset();
+    //document.querySelector("form").reset();
+    window.location.reload();
   } else {
     document.querySelector("#error").innerHTML = "Cannot add course";
   }
@@ -35,6 +46,9 @@ async function addCourse() {
 
 function Teacher() {
   useEffect(() => {
+    if (localStorage.getItem("role") !== "teacher") {
+      window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
+    }
     async function fetchCourses() {
       const response = await fetch(
         //For Deployment
@@ -46,7 +60,16 @@ function Teacher() {
 
       let html = "";
       for (let course of courses) {
-        html += `<a href="#/courses/${course._id}">${course.title} - ${course.department}${course.course_number}</a> - <a href="#/courses/edit/${course._id}">Edit</a></li>`;
+        html += `
+        <div class='course-card'>
+          <div class='course-info'>
+            <h3>${course.title} - ${course.department}${course.course_number}</h3>
+            ${course.credits} Credit Hours
+          </div>
+          <div class = 'course-options'>
+            <a href="#/courses/${course._id}">View</a><a href="#/courses/edit/${course._id}">Edit</a>
+          </div>
+        </div>`;
       }
 
       document.querySelector("#course-list").innerHTML = html;
@@ -59,9 +82,11 @@ function Teacher() {
     <div id="content">
       <div>
         <h1>Courses</h1>
-        <button>+ Add</button>
+        <button id="add-course-open-btn" onClick={toggleModule}>
+          Add a Course +
+        </button>
       </div>
-      <div id="add_module">
+      <div id="add-module">
         <form>
           <div>
             <label htmlFor="title">Course Title:</label>
