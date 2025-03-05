@@ -128,8 +128,10 @@ function Edit() {
           />
         </div>
         <div id="error"></div>
+        <button id="delete-btn" onClick={deleteCourse}>
+          Delete
+        </button>
       </form>
-      <button onClick={deleteCourse}>Delete</button>
     </div>
   );
 }

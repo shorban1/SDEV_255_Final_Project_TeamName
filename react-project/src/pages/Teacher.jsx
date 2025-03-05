@@ -17,9 +17,9 @@ async function addCourse() {
     course_number: document.querySelector("#course-num").value,
     credits: document.querySelector("#credits").value,
     description: document.querySelector("#description").value,
-    instructor_ids: ["67c66f59b0f5c4ab17437c8a", localStorage.getItem("uid")],
+    instructor_ids: ["67c66f59b0f5c4ab17437c8a", localStorage.getItem("id")],
   };
-
+  console.log(course);
   const response = await fetch(
     //For Deployment
     "https://mire-fluttering-scale.glitch.me/api/courses",
@@ -52,7 +52,8 @@ function Teacher() {
     async function fetchCourses() {
       const response = await fetch(
         //For Deployment
-        "https://mire-fluttering-scale.glitch.me/api/courses"
+        "https://mire-fluttering-scale.glitch.me/api/courses/teacher/" +
+          localStorage.getItem("id")
         //For Local Development
         //"http://localhost:3000/api/courses"
       );
@@ -81,7 +82,7 @@ function Teacher() {
   return (
     <div id="content">
       <div>
-        <h1>Courses</h1>
+        <h1>My Courses</h1>
         <button id="add-course-open-btn" onClick={toggleModule}>
           Add a Course +
         </button>
@@ -93,7 +94,7 @@ function Teacher() {
             <input type="text" id="title" />
           </div>
           <div>
-            <label htmlFor="department">Department(XX):</label>
+            <label htmlFor="department">Department(DEPT):</label>
             <input type="text" id="department" />
           </div>
           <div>
