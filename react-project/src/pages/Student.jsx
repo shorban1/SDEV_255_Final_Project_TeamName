@@ -41,8 +41,13 @@ function Student() {
   const [coursesState, setCourses] = useState([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    if (localStorage.getItem("role") !== "student") {
+    if (localStorage.getItem("auth") != 1) {
       window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
+    } else if (localStorage.getItem("role") !== "student") {
+      alert(
+        "You are currently signed in with a teacher account.\nLog out and sign in with a student account to view this page."
+      );
+      window.history.back();
     }
     async function fetchCourses() {
       const response = await fetch(
@@ -66,7 +71,7 @@ function Student() {
       <div>
         <h1>All Courses</h1>
       </div>
-      <a id="schedule-link" href="#/student/schedule">
+      <a className="button-link-2" href="#/student/schedule">
         My Schedule
       </a>
       <div id="course-list">
@@ -88,10 +93,12 @@ function Student() {
           );
         })}
         {coursesState.length === 0 && loaded && (
-          <h3 class="no-courses">There are no available courses to take.</h3>
+          <h3 className="no-courses">
+            There are no available courses to take.
+          </h3>
         )}
         {coursesState.length === 0 && loaded && (
-          <h4 class="no-courses">
+          <h4 className="no-courses">
             Check back later to see if any additions are made.
           </h4>
         )}

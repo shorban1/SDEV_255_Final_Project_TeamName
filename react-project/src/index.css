@@ -53,6 +53,13 @@ nav a:visited {
 nav a:hover {
   color: #bcbcbc;
 }
+p {
+  text-align: justify;
+  width: 90%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
 #content {
   width: 100%;
   text-align: center;
@@ -61,7 +68,7 @@ nav a:hover {
 #buttons {
   margin: 10px 0;
 }
-.button-link {
+.button-link-1 {
   display: inline-block;
   text-align: center;
   width: 200px;
@@ -71,13 +78,13 @@ nav a:hover {
   text-decoration: none;
   margin: 0 5px;
 }
-.button-link:link {
+.button-link-1:link {
   color: #ffffff;
 }
-.button-link:visited {
+.button-link-1:visited {
   color: #ffffff;
 }
-.button-link:hover {
+.button-link-1:hover {
   color: #ffffff;
 }
 #logout {
@@ -203,12 +210,12 @@ form [type="button"]:hover {
   color: #404040;
 }
 
-#schedule-link {
+.button-link-2 {
   display: block;
   text-decoration: none;
   width: 150px;
   color: #0c4614;
-  background: none;
+  background-color: #ffffff;
   border: 2px solid #0c4614;
   border-radius: 3px;
   padding: 3px;
@@ -216,12 +223,22 @@ form [type="button"]:hover {
   margin-right: auto;
   margin-bottom: 10px;
 }
-#schedule-link a:link {
+.button-link-2:link {
   color: #0c4614;
 }
-#schedule-link a:visited {
+.button-link-2:visited {
   color: #0c4614;
 }
-#schedule-link a:hover {
-  color: #0c4614;
+.button-link-2:hover {
+  color: #000000;
+  cursor: pointer;
+}
+#course-details {
+  background-color: #eeeeee;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+#error {
+  color: #c50000;
 }

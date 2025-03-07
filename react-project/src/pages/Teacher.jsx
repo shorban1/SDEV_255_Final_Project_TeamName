@@ -37,7 +37,6 @@ async function addCourse() {
   if (response.ok) {
     const results = await response.json();
     alert("Added course with ID of " + results._id);
-    //document.querySelector("form").reset();
     window.location.reload();
   } else {
     document.querySelector("#error").innerHTML = "Cannot add course";
@@ -46,8 +45,13 @@ async function addCourse() {
 
 function Teacher() {
   useEffect(() => {
-    if (localStorage.getItem("role") !== "teacher") {
+    if (localStorage.getItem("auth") != 1) {
       window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
+    } else if (localStorage.getItem("role") !== "teacher") {
+      alert(
+        "You are currently signed in with a student account.\nLog out and sign in with a teacher account to view this page."
+      );
+      window.history.back();
     }
     async function fetchCourses() {
       const response = await fetch(
@@ -72,8 +76,9 @@ function Teacher() {
           </div>
         </div>`;
       }
-
-      document.querySelector("#course-list").innerHTML = html;
+      if (document.querySelector("#course-list")) {
+        document.querySelector("#course-list").innerHTML = html;
+      }
     }
 
     fetchCourses();

@@ -23,11 +23,20 @@ async function register() {
 
   if (response.ok) {
     const results = await response.json();
-    alert("Registered User with ID of " + results._id);
-    //document.querySelector("form").reset();
+    alert("Added course with ID of " + results._id);
     window.location.reload();
   } else {
-    document.querySelector("#error").innerHTML = "Cannot create user";
+    document.querySelector("#error").innerHTML = "Cannot add course";
+  }
+
+  if (response.ok) {
+    const results = await response.json();
+    document.querySelector("#error").innerHTML = "";
+    alert("Registered User with ID of " + results._id);
+    window.location.replace("/SDEV_255_Final_Project_TeamName/#/login");
+  } else {
+    const err = await response.text();
+    document.querySelector("#error").innerHTML = err;
   }
 }
 
@@ -35,6 +44,7 @@ function Register() {
   useEffect(() => {
     const auth = localStorage.getItem("auth");
     if (auth == 1) {
+      alert("You are already signed in");
       window.history.back();
     }
   });
@@ -60,6 +70,7 @@ function Register() {
             <option value="teacher">Teacher</option>
           </select>
         </div>
+        <div id="error"></div>
         <div>
           <input
             type="button"
@@ -68,7 +79,6 @@ function Register() {
             onClick={register}
           />
         </div>
-        <div id="error"></div>
       </form>
     </div>
   );

@@ -22,6 +22,7 @@ async function login() {
     }
   );
   if (response.ok) {
+    document.querySelector("#error").innerText = "";
     const tokenResponse = await response.json();
     token = tokenResponse.token;
     const id = tokenResponse.id;
@@ -53,6 +54,7 @@ function Login() {
   useEffect(() => {
     const auth = localStorage.getItem("auth");
     if (auth == 1) {
+      alert("You are already signed in");
       window.history.back();
     }
   });
@@ -71,6 +73,7 @@ function Login() {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" />
         </div>
+        <div id="error"></div>
         <div>
           <input
             type="button"
@@ -79,7 +82,6 @@ function Login() {
             onClick={login}
           />
         </div>
-        <div id="error"></div>
       </form>
       Not registered?{" "}
       <a href="/SDEV_255_Final_Project_TeamName/#/register">

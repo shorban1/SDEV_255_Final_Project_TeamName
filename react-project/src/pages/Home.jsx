@@ -7,10 +7,10 @@ const Home = ({ name }) => (
   <div id="content">
     <h1>Get started using {name} </h1>
     <div id="buttons">
-      <Link className="button-link" to="/student">
+      <Link className="button-link-1" to="/student">
         Student
       </Link>
-      <Link className="button-link" to="/teacher">
+      <Link className="button-link-1" to="/teacher">
         Teacher
       </Link>
     </div>
