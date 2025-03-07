@@ -65,7 +65,7 @@ function Schedule() {
     <div id="content">
       <div>
         <h1>Schedule</h1>
-        <a id="schedule-link" href="/#/student">
+        <a id="schedule-link" href="#/student">
           Return to Courses
         </a>
       </div>
