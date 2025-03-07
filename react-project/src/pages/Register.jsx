@@ -20,15 +20,6 @@ async function register() {
       body: JSON.stringify(user),
     }
   );
-
-  if (response.ok) {
-    const results = await response.json();
-    alert("Added course with ID of " + results._id);
-    window.location.reload();
-  } else {
-    document.querySelector("#error").innerHTML = "Cannot add course";
-  }
-
   if (response.ok) {
     const results = await response.json();
     document.querySelector("#error").innerHTML = "";

@@ -19,7 +19,6 @@ async function addCourse() {
     description: document.querySelector("#description").value,
     instructor_ids: ["67c66f59b0f5c4ab17437c8a", localStorage.getItem("id")],
   };
-  console.log(course);
   const response = await fetch(
     //For Deployment
     "https://mire-fluttering-scale.glitch.me/api/courses",
@@ -114,6 +113,7 @@ function Teacher() {
             <label htmlFor="description">Description:</label>
             <textarea id="description" cols="30" rows="10"></textarea>
           </div>
+          <div id="error"></div>
           <div>
             <input
               type="button"
@@ -122,7 +122,6 @@ function Teacher() {
               onClick={addCourse}
             />
           </div>
-          <div id="error"></div>
         </form>
       </div>
       <div id="course-list"></div>
