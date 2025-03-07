@@ -10,8 +10,6 @@ function Course() {
     }
 
     async function fetchCourses() {
-      console.log(id);
-
       const response = await fetch(
         //For Deployment
         "https://mire-fluttering-scale.glitch.me/api/courses/" + id
@@ -19,7 +17,6 @@ function Course() {
         //"http://localhost:3000/api/courses/" + songID
       );
       const course = await response.json();
-      console.log(course);
 
       if (localStorage.getItem("role") == "teacher") {
         if (course.instructor_ids.includes(localStorage.getItem("id"))) {
@@ -31,8 +28,8 @@ function Course() {
       let html = "";
 
       html += `
-      <h2>${course.title} - ${course.department}${course.course_number}</h2>
-      <p>Credits: ${course.credits}</p>
+      <h1>${course.title} - ${course.department}${course.course_number}</h1>
+      <h2>Credits: ${course.credits}</h2>
       <p>Description: ${course.description}</p>
       ${courseOptions}
       `;
@@ -45,9 +42,6 @@ function Course() {
 
   return (
     <div id="content">
-      <div>
-        <h1>Course View</h1>
-      </div>
       <div id="course-details"></div>
     </div>
   );

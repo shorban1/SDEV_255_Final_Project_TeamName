@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-async function addCourse(cid) {
+async function dropCourse(cid) {
   const id = localStorage.getItem("id");
 
   const response1 = await fetch(
@@ -10,34 +9,34 @@ async function addCourse(cid) {
     //"http://localhost:3000/api/courses/" + songID
   );
   const user = await response1.json();
-  if (!user.courses.includes(cid)) {
-    user.courses.push(cid);
 
-    const response2 = await fetch(
-      //For Deployment
-      "https://mire-fluttering-scale.glitch.me/api/users/" + id,
-      //For Local Development
-      //"http://localhost:3000/api/courses/" + id,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }
-    );
+  if (user.courses.includes(cid)) {
+    user.courses.splice(user.courses.indexOf(cid), 1);
+  }
 
-    if (response2.ok) {
-      alert("Course added to schedule");
-      window.location.reload();
-    } else {
-      alert("Course failed to add to your schedule");
+  const response2 = await fetch(
+    //For Deployment
+    "https://mire-fluttering-scale.glitch.me/api/users/" + id,
+    //For Local Development
+    //"http://localhost:3000/api/courses/" + id,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
     }
+  );
+
+  if (response2.ok) {
+    alert("Removed course from schedule");
+    window.location.reload();
   } else {
-    alert("This course is already in your schedule");
+    document.querySelector("#error").innerHTML =
+      "Cannot remove course from schedule";
   }
 }
-function Student() {
+function Schedule() {
   const [coursesState, setCourses] = useState([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -47,7 +46,7 @@ function Student() {
     async function fetchCourses() {
       const response = await fetch(
         //For Deployment
-        "https://mire-fluttering-scale.glitch.me/api/courses/student/" +
+        "https://mire-fluttering-scale.glitch.me/api/courses/student/schedule/" +
           localStorage.getItem("id")
         //For Local Development
         //"http://localhost:3000/api/courses"
@@ -61,14 +60,15 @@ function Student() {
 
     fetchCourses();
   }, [coursesState]);
+
   return (
     <div id="content">
       <div>
-        <h1>All Courses</h1>
+        <h1>Schedule</h1>
+        <a id="schedule-link" href="/#/student">
+          Return to Courses
+        </a>
       </div>
-      <a id="schedule-link" href="#/student/schedule">
-        My Schedule
-      </a>
       <div id="course-list">
         {coursesState.map((course) => {
           return (
@@ -82,22 +82,17 @@ function Student() {
               </div>
               <div className="course-options">
                 <a href={"#/courses/" + course._id}>View</a>
-                <button onClick={() => addCourse(course._id)}>Add</button>
+                <button onClick={() => dropCourse(course._id)}>Drop</button>
               </div>
             </div>
           );
         })}
         {coursesState.length === 0 && loaded && (
-          <h3 class="no-courses">There are no available courses to take.</h3>
-        )}
-        {coursesState.length === 0 && loaded && (
-          <h4 class="no-courses">
-            Check back later to see if any additions are made.
-          </h4>
+          <h3 class="no-courses">You are not scheduled for any courses</h3>
         )}
       </div>
     </div>
   );
 }
 
-export default Student;
+export default Schedule;

@@ -5,7 +5,7 @@ import "./App.css";
 import { Route, Routes, useNavigate, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Student from "./pages/Student";
-import Cart from "./pages/Cart";
+import Schedule from "./pages/Schedule";
 import Teacher from "./pages/Teacher";
 import Course from "./pages/Course";
 import Edit from "./pages/Edit";
@@ -59,7 +59,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home name="Course Manager" />} />
         <Route path="/student" element={<Student />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/student/schedule" element={<Schedule />} />
         <Route path="/teacher" element={<Teacher />} />
         <Route path="/courses/:id" element={<Course />} />
         <Route path="/courses/edit/:id" element={<Edit />} />
