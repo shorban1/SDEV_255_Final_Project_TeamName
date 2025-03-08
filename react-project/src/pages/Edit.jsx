@@ -44,14 +44,14 @@ async function deleteCourse() {
       {
         method: "DELETE",
       }
-    );
-
-    if (response.ok) {
-      alert("Deleted Course");
-      window.location.replace("/SDEV_255_Final_Project_TeamName/#/teacher");
-    } else {
-      document.querySelector("#error").innerHTML = "Cannot delete course";
-    }
+    ).then((response) => {
+      if (response.ok) {
+        alert("Deleted Course");
+        window.location.replace("/SDEV_255_Final_Project_TeamName/#/teacher");
+      } else {
+        document.querySelector("#error").innerHTML = "Cannot delete course";
+      }
+    });
   }
 }
 
